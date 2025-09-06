@@ -66,10 +66,9 @@ function getStringFromTemplate(firstName, lastName) {
  *   'Hello, John Doe!' => 'John Doe'
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
-function extractNameFromTemplate(/* value */) {
-  throw new Error('Not implemented');
+function extractNameFromTemplate(value) {
+  return value.slice(7, -1);
 }
-
 /**
  * Returns a first char of the given string.
  *
@@ -199,10 +198,12 @@ function extractEmails(str) {
  *
  * @example
  *
- *            '┌────┐\n'+
+ *            '┌ ───-─┐\n'+
+ *
  *  (6,4) =>  '│    │\n'+
+ *
  *            '│    │\n'+
- *            '└────┘\n'
+ *            ' └ ──-──┘\n'
  *
  *  (2,2) =>  '┌┐\n'+
  *            '└┘\n'
@@ -232,9 +233,39 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const s1 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz !?.,';
+  const s2 = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm !?.,';
+  const strArr1 = str.split('');
+  let strArr2 = '';
+  strArr1.forEach((elem) => {
+    for (let i = 0; i < s1.length; i += 1) {
+      // console.log(elem);
+      // console.log(i);
+      // console.log(s1[i]);
+      // console.log((elem === s1[i]));
+      // console.log('===========');
+      if (elem === s1[i]) {
+        // console.log(i);
+        // console.log('равно');
+        strArr2 += s2[i];
+        // console.log(strArr2);
+        // console.log('+++++++++++');
+        break;
+      }
+      // else if (elem === ' ' || '!' || '?' || '.' || ',') {
+      //   console.log('не равно');
+      //   strArr2 += elem;
+      //   console.log(strArr2);
+      //   break;
+      // }
+    }
+  });
+  // console.log(strArr2);
+  return strArr2;
 }
+
+// encodeToRot13('Hel lo');
 
 /**
  * Returns true if the value is string; otherwise false.
